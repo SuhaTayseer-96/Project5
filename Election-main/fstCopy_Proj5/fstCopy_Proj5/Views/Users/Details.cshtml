@@ -1,0 +1,115 @@
+﻿@model fstCopy_Proj5.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NationalNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NationalNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectionArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectionArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Governorate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Governorate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalElections)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalElections)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartyElections)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartyElections)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.whitePaperLocalElections)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.whitePaperLocalElections)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.whitePaperPartyElections)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.whitePaperPartyElections)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "Election Districts";
+    string electionArea = ViewBag.ElectionArea;
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div style="display: flex; flex-direction: column; justify-content: center;">
+    <h2 class="text-center mb-5">اختيار الدائرة الانتخابية</h2>
+
+    <div class="container">
+        <div class="row">
+            <!-- Card for Irbed First District -->
+            <div class="col-md-4 mb-4">
+                <div class="card election-card @(electionArea == "اربد الأولى" ? "active" : "")" style="width: 22rem;">
+                    <img src="~/images/irbid1.jpg" class="card-img-top" alt="دائرة اربد الأولى">
+                    <div class="card-body">
+                        <h5 class="card-title">دائرة اربد الأولى</h5>
+                        <button type="button" class="btn btn-light btn-block"
+                                onclick="location.href='@Url.Action("IrbedFirstDistrict", "USER")'"
+                                @(electionArea == "اربد الأولى" ? "" : "disabled")>
+                            الدخول إلى دائرة اربد الأولى
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Irbed Second District -->
+            <div class="col-md-4 mb-4">
+                <div class="card election-card @(electionArea == "اربد الثانية" ? "active" : "")" style="width: 22rem ">
+                    <img src="~/images/irbid2.jpg" class="card-img-top" alt="دائرة اربد الثانية">
+                    <div class="card-body">
+                        <h5 class="card-title">دائرة اربد الثانية</h5>
+                        <button type="button" class="btn btn-light btn-block"
+                                onclick="location.href='@Url.Action("IrbedSecondDistrict", "USER")'"
+                                @(electionArea == "اربد الثانية" ? "" : "disabled")>
+                            الدخول إلى دائرة اربد الثانية
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Ajloun District -->
+            <div class="col-md-4 mb-4">
+                <div class="card election-card @(electionArea == "عجلون" ? "active" : "")" style="width: 22rem">
+                    <img src="~/images/Ajlon.jpg" class="card-img-top" alt="دائرة عجلون">
+                    <div class="card-body">
+                        <h5 class="card-title">دائرة عجلون</h5>
+                        <button type="button" class="btn btn-light btn-block"
+                                onclick="location.href='@Url.Action("AjlounDistrict", "USER")'"
+                                @(electionArea == "عجلون" ? "" : "disabled")>
+                            الدخول إلى دائرة عجلون
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example of Disabled Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card election-card" style="width: 22rem;">
+                    <img src="~/images/amman1.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                    <div class="card-body disabled">
+                        <h5 class="card-title disabled">دائرة عمان</h5>
+                        <button type="button" class="btn btn-light btn-block disabled">
+                            الدخول إلى دائرة عمان الأولى
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat the disabled card as needed -->
+            <div class="col-md-4 mb-4">
+                <div class="card election-card" style="width: 22rem;">
+                    <img src="~/images/Amman2.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                    <div class="card-body disabled">
+                        <h5 class="card-title disabled">دائرة عمان</h5>
+                        <button type="button" class="btn btn-light btn-block disabled">
+                            الدخول إلى دائرة عمان الثانية
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card election-card" style="width: 22rem;">
+                    <img src="~/images/Amman3.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                    <div class="card-body disabled">
+                        <h5 class="card-title disabled">دائرة عمان</h5>
+                        <button type="button" class="btn btn-light btn-block disabled">
+                            الدخول إلى دائرة عمان الثالثة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card election-card" style="width: 22rem;">
+                    <img src="~/images/As-salt.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                    <div class="card-body disabled">
+                        <h5 class="card-title disabled">دائرة السلط</h5>
+                        <button type="button" class="btn btn-light btn-block disabled">
+                            الدخول إلى دائرة السلط
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card election-card" style="width: 22rem;">
+                    <img src="~/images/karak.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                    <div class="card-body disabled">
+                        <h5 class="card-title disabled">دائرة الكرك</h5>
+                        <button type="button" class="btn btn-light btn-block disabled">
+                            الدخول إلى دائرة الكرك
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card election-card" style="width: 22rem;">
+                    <img src="~/images/jarash.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                    <div class="card-body disabled">
+                        <h5 class="card-title disabled">دائرة جرش</h5>
+                        <button type="button" class="btn btn-light btn-block disabled">
+                            الدخول إلى دائرة جرش
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card election-card" style="width: 22rem;">
+                    <img src="~/images/petra.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                    <div class="card-body disabled">
+                        <h5 class="card-title disabled">دائرة معان</h5>
+                        <button type="button" class="btn btn-light btn-block disabled">
+                            الدخول إلى دائرة معان
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card election-card" style="width: 22rem;">
+                    <img src="~/images/aqaba.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                    <div class="card-body disabled">
+                        <h5 class="card-title disabled">دائرة العقبة</h5>
+                        <button type="button" class="btn btn-light btn-block disabled">
+                            الدخول إلى دائرة العقبة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card election-card" style="width: 22rem;">
+                    <img src="~/images/Mafraq.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                    <div class="card-body disabled">
+                        <h5 class="card-title disabled">دائرة المفرق</h5>
+                        <button type="button" class="btn btn-light btn-block disabled">
+                            الدخول إلى دائرة المفرق
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .election-card {
+        background-color: #fff; /* Red background */
+        color: #fff; /* White text */
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 10px;
+    }
+
+        .election-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .card-img-top {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        width: 100%;
+        height: 180px; /* Fixed height for images */
+        object-fit: cover;
+    }
+
+    .card-body {
+        text-align: center; /* Center align text */
+        padding: 1.25rem; /* Adjust padding to fit the card */
+    }
+
+    .card-title {
+        font-size: 18px; /* Adjust title size */
+        margin-bottom: 10px;
+    }
+
+    .btn-light {
+        background-color: #fff;
+        color: #dc3545;
+        border: none;
+        border-radius: 5px;
+    }
+
+        .btn-light:disabled {
+            background-color: #f8f9fa;
+            color: #dc3545;
+        }
+</style>

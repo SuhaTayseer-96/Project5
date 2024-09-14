@@ -1,0 +1,120 @@
+﻿@model fstCopy_Proj5.Models.GeneralListing
+
+@{
+    ViewBag.Title = "إنشاء قائمة جديدة";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <style>
+        body, .form-horizontal, h2, h4, label, input, select, textarea {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .form-container {
+            background-color: #FFFFFF;
+            border: 1px solid #D3D3D3;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-title {
+            color: #CE1126;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group label {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            border-radius: 5px;
+            border: 1px solid #D3D3D3;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+            .form-group input:focus {
+                border-color: #007A33;
+                box-shadow: 0 0 5px rgba(0, 122, 51, 0.3);
+            }
+
+        .form-group .text-danger {
+            font-size: 0.875rem;
+        }
+
+        .btn-submit {
+            background-color: #CE1126;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+            .btn-submit:hover {
+                background-color: #007A33;
+            }
+
+        .form-horizontal {
+            margin-top: 50px;
+        }
+    </style>
+
+    <div class="form-horizontal form-container">
+        <h2 class="form-title">إنشاء قائمة جديدة</h2>
+        <hr style="border-top: 2px solid #007A33;" />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, "اسم القائمة", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Delegate_Name, "اسم المفوض", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Delegate_Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Delegate_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Delegate_Phone, "هاتف المفوض", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Delegate_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Delegate_Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Delegate_Email, "البريد الإلكتروني للمفوض", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Delegate_Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Delegate_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="إنشاء" class="btn btn-submit" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,96 @@
+﻿@model fstCopy_Proj5.Models.DATE
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>تحديد موعد الانتخابات</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .custom-form .control-label {
+            text-align: right;
+            float: right;
+        }
+
+        .custom-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .custom-form .btn-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .custom-form .text-center {
+            text-align: center;
+        }
+
+        .custom-form .form-group label {
+            font-weight: bold;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container custom-form">
+        <h2 class="text-center">تحديد موعد الانتخابات</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">بداية الترشيح</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.startDateNominate, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                        @Html.ValidationMessageFor(model => model.startDateNominate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">نهاية الترشيح</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EndDateNominate, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                        @Html.ValidationMessageFor(model => model.EndDateNominate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">بداية الانتخابات</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.startDateOfElection, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                        @Html.ValidationMessageFor(model => model.startDateOfElection, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">نهاية الانتخابات</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EndDateOfElection, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                        @Html.ValidationMessageFor(model => model.EndDateOfElection, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group btn-center">
+                    <div class="col-md-12">
+                        <input type="submit" value="إضافة" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+﻿@model IEnumerable<fstCopy_Proj5.Models.GeneralListing>
+
+@{
+    ViewBag.Title = "طلبات الترشح للقوائم الحزبية  ";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2 class="page-title">طلبات الترشح للقوائم الحزبية</h2>
+
+<table class="table table-bordered table-hover rtl-table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayName(" اسم القائمة الحزبية  ")
+            </th>
+            <th>
+                @Html.DisplayName("اسم المفوض")
+            </th>
+            <th>
+                @Html.DisplayName("هاتف المفوض")
+            </th>
+            <th>
+                @Html.DisplayName("بريد المفوض")
+            </th>
+            <th>الإجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delegate_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delegate_Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delegate_Email)
+                </td>
+                <td>
+                    @Html.ActionLink("رفض", "Delete", new { id = item.Name }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    /* تحويل اتجاه النص من اليمين لليسار */
+    body {
+        direction: rtl;
+        text-align: right;
+    }
+
+    /* إضافة تصميم احترافي للعناوين */
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    /* تصميم الجدول */
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: #fff;
+    }
+
+        .table th, .table td {
+            padding: 15px;
+            vertical-align: middle;
+            text-align: right; /* التأكيد على أن النص يبدأ من اليمين */
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #dee2e6;
+        }
+
+    .thead-dark th {
+        color: #fff;
+        background-color: #343a40;
+        border-color: #454d55;
+    }
+
+    /* تصميم الأزرار */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+            border-color: #b21f2d;
+        }
+</style>

@@ -1,0 +1,50 @@
+﻿@model fstCopy_Proj5.Models.DATE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DATE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.startDateNominate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startDateNominate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDateNominate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDateNominate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startDateOfElection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startDateOfElection)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDateOfElection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDateOfElection)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

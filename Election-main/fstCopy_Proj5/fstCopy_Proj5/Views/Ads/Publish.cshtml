@@ -1,0 +1,16 @@
+﻿
+@model fstCopy_Proj5.Models.Ad
+
+@{
+    ViewBag.Title = "Publish";
+}
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="~/Images/@Model.URL" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.data</h5>
+        <p class="card-title">@Model.partyName</p>
+        <p class="card-text">@Model.description</p>
+        <p class="card-text"><small class="text-muted">@Model.electionArea</small></p>
+    </div>
+</div>

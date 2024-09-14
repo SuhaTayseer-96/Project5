@@ -1,0 +1,82 @@
+﻿@model IEnumerable<fstCopy_Proj5.Models.Contact>
+
+@{
+    ViewBag.Title = "قائمة الاتصالات";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="row align-items-center my-4">
+                <div class="col">
+                    <h2 class="h3 mb-0 page-title" style="text-align: right;">رسائل المستخدمين</h2>
+                </div>
+                <div class="col-auto">
+                    <form id="filterForm" method="get" action="@Url.Action("Index")">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="isRead" id="all" value="" @(Request["isRead"] == null || Request["isRead"] == "0" ? "checked" : "")>
+                            <label class="form-check-label" for="all">الكل</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="isRead" id="read" value="true" @(Request["isRead"] == "true" ? "checked" : "")>
+                            <label class="form-check-label" for="read">مقروءة</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="isRead" id="unread" value="false" @(Request["isRead"] == "false" ? "checked" : "")>
+                            <label class="form-check-label" for="unread">غير مقروءة</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- الجدول -->
+            <div class="card shadow">
+                <div class="card-body">
+                    <table class="table table-borderless table-hover text-right">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayName("البريد الإلكتروني")</th>
+                                <th>@Html.DisplayName("الاسم")</th>
+                                <th>@Html.DisplayName("الموضوع")</th>
+                                <th>@Html.DisplayName("الرسالة")</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                string rowClass = item.IsRead ? "light-gray-bg " : "";
+                                <tr class="@rowClass">
+                                    <td>
+                                        <p class="mb-0 text-muted"><strong>@Html.DisplayFor(modelItem => item.email)</strong></p>
+                                    </td>
+                                    <td>
+                                        <small class="mb-0 text-muted">@Html.DisplayFor(modelItem => item.name)</small>
+                                    </td>
+                                    <td>
+                                        <small class="mb-0 text-muted">@Html.DisplayFor(modelItem => item.subject)</small>
+                                    </td>
+                                    <td>
+                                        <small class="mb-0 text-muted">@Html.DisplayFor(modelItem => item.message)</small>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sm" href="@Url.Action("DetailsContact", "Contact", new { id = item.id })">
+                                            <span class="fe fe-eye fe-12 mr-2"></span>تفاصيل
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('input[name="isRead"]').forEach((elem) => {
+        elem.addEventListener("change", function (event) {
+            document.getElementById('filterForm').submit();
+        });
+    });</script>

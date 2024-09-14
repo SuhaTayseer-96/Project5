@@ -1,0 +1,112 @@
+﻿@model IEnumerable<fstCopy_Proj5.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>المستخدمون</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .table th, .table td {
+            text-align: right;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .form-container {
+            border-top: 2px solid red;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .form-group.text-right {
+            text-align: right;
+        }
+
+            .form-group.text-right .btn {
+                background-color: #d9534f;
+                border-color: #d43f3a;
+                color: #fff;
+            }
+
+                .form-group.text-right .btn:hover {
+                    background-color: #c9302c;
+                    border-color: #ac2925;
+                }
+
+        .page-title {
+            font-weight: bold;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <div class="container form-container">
+        <h2 class="text-center page-title">المستخدمون</h2>
+
+        <div class="form-group text-right">
+            @*@Html.ActionLink("إضافة مستخدم جديد", "Create", null, new { @class = "btn btn-danger" })*@
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.NationalNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.Password)</th>
+                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                    <th>@Html.DisplayNameFor(model => model.ElectionArea)</th>
+                    <th>@Html.DisplayNameFor(model => model.Governorate)</th>
+                    <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                    @*<th>@Html.DisplayNameFor(model => model.LocalElections)</th>
+                    <th>@Html.DisplayNameFor(model => model.PartyElections)</th>
+                    <th>@Html.DisplayNameFor(model => model.whitePaperLocalElections)</th>
+                    <th>@Html.DisplayNameFor(model => model.whitePaperPartyElections)</th>*@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.NationalNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Password)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ElectionArea)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Governorate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.BirthDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                        @*<td>@Html.DisplayFor(modelItem => item.LocalElections)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PartyElections)</td>
+                        <td>@Html.DisplayFor(modelItem => item.whitePaperLocalElections)</td>
+                        <td>@Html.DisplayFor(modelItem => item.whitePaperPartyElections)</td>*@
+                        <td class="text-left">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

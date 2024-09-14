@@ -1,0 +1,94 @@
+﻿@model fstCopy_Proj5.Models.Debate
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+
+}
+
+<h2 class="text-center mb-4">Delete Debate</h2>
+
+<div class="container">
+    <h3 class="text-danger mb-4">Are you sure you want to delete this?</h3>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Debate Details</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Circle_ID)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Circle_ID)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Date_Of_Debate)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Date_Of_Debate)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Topic)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Topic)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.First_Candidate)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.First_Candidate)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.First_Candidate_List)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.First_Candidate_List)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Second_Candidate)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Second_Candidate)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Second_Candidate_List)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Second_Candidate_List)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Zoom_link)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Zoom_link)
+                </dd>
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="text-center mt-4">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-secondary ml-2" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

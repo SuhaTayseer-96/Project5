@@ -1,0 +1,126 @@
+﻿@model fstCopy_Proj5.Models.GeneralListCandidate
+
+@{
+    ViewBag.Title = "مرشحو القائمة العامة";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2 style="color: #CE1126;">مرشحو القائمة العامة</h2>
+
+@if (ViewBag.CandidateList != null && ViewBag.CandidateList.Count > 3)
+{
+    <div class="alert alert-warning">
+        <strong>تحذير!</strong> لا يمكن إضافة أكثر من 41 مرشح في نفس القائمة.
+    </div>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="background-color: #F2F2F2; border: 1px solid #000; padding: 20px;">
+            <h4 style="color: #007A33;">إضافة مرشح جديد</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CandidateName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CandidateName, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.CandidateName, "اسم المرشح", htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NationalNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NationalNumber, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.NationalNumber, "الرقم الوطني", htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "ذكر", Value = "ذكر" },
+                        new SelectListItem { Text = "أنثى", Value = "أنثى" }
+                    }, "اختر الجنس", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Gender, "الجنس", htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Religion, new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "الإسلام", Value = "الإسلام" },
+                        new SelectListItem { Text = "المسيحية", Value = "المسيحية" },
+                        new SelectListItem { Text = "ديانة أخرى", Value = "ديانة أخرى" }
+                    }, "اختر الديانة", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Religion, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Religion, "الديانة", htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Email, "البريد الإلكتروني", htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="إضافة مرشح" class="btn btn-danger" style="background-color: #CE1126; color: white; border: none;" />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (ViewBag.CandidateList != null && ViewBag.CandidateList.Count > 0)
+{
+    <h4 style="color: #007A33;">قائمة المرشحين المضافين</h4>
+    <hr />
+    <div class="row">
+        @foreach (var candidate in ViewBag.CandidateList)
+        {
+            <div class="col-md-4">
+                <div class="card" style="border: 1px solid #007A33; margin-bottom: 20px;">
+                    <div class="card-body" style="padding: 20px;">
+                        <h5 class="card-title" style="color: #007A33;">@candidate.CandidateName</h5>
+                        <p class="card-text"><strong>الرقم الوطني:</strong> @candidate.NationalNumber</p>
+                        <p class="card-text"><strong>الجنس:</strong> @candidate.Gender</p>
+                        <p class="card-text"><strong>الديانة:</strong> @candidate.Religion</p>
+                        <p class="card-text"><strong>البريد الإلكتروني:</strong> @candidate.Email</p>
+
+                        <!-- زر الحذف -->
+                        @using (Html.BeginForm("DeleteCandidate", "GeneralListings", FormMethod.Post, new { id = "deleteCandidateForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="submit" value="استبعاد المرشح" class="btn btn-danger btn-xs" style="margin-top: 10px;" />
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    using (Html.BeginForm("SubmitAllCandidates", "GeneralListings", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="حفظ جميع المرشحين" class="btn btn-success" style="background-color: #007A33; color: white; border: none;" />
+    }
+}
+
+<style>
+    * {
+        direction: rtl;
+        text-align: right;
+    }
+
+</style>

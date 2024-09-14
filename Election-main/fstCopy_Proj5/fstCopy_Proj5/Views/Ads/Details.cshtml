@@ -1,0 +1,82 @@
+﻿@model fstCopy_Proj5.Models.Ad
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ad</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nationalId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nationalId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.listId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.listId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.partyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.partyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.electionArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.electionArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.URL)
+        </dt>
+
+        <dd>
+            <img src="~/Images/@Model.URL" alt="No Image" width="100" height="100" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "advertisementAdmin")
+</p>

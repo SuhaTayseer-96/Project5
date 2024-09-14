@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Publishs";
+}
+
+
+@foreach (var ad in Model)
+{
+    <div class="col-md-6 col-sm-12">
+        <div class="event-layout-1 theme-custom-box-shadow clearfix">
+            <figure class="event-img">
+                <a href="#">
+                    <img src="~/Images/@ad.URL" alt="Card image cap" class="img-fluid">
+                </a>
+            </figure>
+            <div class="event-info">
+                <a class="event-date" href="#">
+                    <i class="fa fa-calendar-o"></i> @ad.data
+                </a>
+                <h4>
+                    <a href="#">@ad.data</a>
+                </h4>
+                <div class="event-exceprt">@ad.description</div>
+                <div class="event-time">
+                    <a href="#"><i class="fa fa-map-marker"></i> @ad.electionArea</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

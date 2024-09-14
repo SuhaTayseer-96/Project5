@@ -1,0 +1,896 @@
+﻿@model List<fstCopy_Proj5.Models.CircleViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Political Buddies - Election Campaign & Activism HTML5 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Political Buddies - Election Campaign & Activism HTML5 Template">
+    <meta name="author" content="xenioushk">
+    <link href=@Url.Content("/Content/images/favicon.png") rel="shortcut icon" />
+    <link href=@Url.Content("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css") rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- The styles -->
+    <link href=@Url.Content("/Content/libs/bootstrap/styles/bootstrap.min.css") rel="stylesheet" />
+    <link href=@Url.Content("/Content/libs/font-awesome/font-awesome.min.css") rel="stylesheet" type="text/css">
+    <link href=@Url.Content("/Content/libs/animate/styles/animate.css") rel="stylesheet" type="text/css">
+    <link href=@Url.Content("/Content/libs/owl.carousel/styles/owl.carousel.css") rel="stylesheet" type="text/css">
+    <link href=@Url.Content("/Content/libs/owl.carousel/styles/owl.theme.css") rel="stylesheet" type="text/css">
+    <link href=@Url.Content("/Content/libs/venobox/styles/venobox.css") rel="stylesheet" type="text/css">
+    <link href=@Url.Content("/Content/css/styles.css") rel="stylesheet" type="text/css">
+
+    <style>
+        /* General Styles */
+
+        /* Slider Styles */
+        .slider-wrap {
+            position: relative;
+        }
+
+        .slider_item_container {
+            position: relative;
+            color: #fff;
+        }
+
+        .background-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        /* Event Layout */
+        .event-layout-1 {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .event-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        .event-info {
+            padding: 20px;
+        }
+
+        .event-date {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .event-info h4 a {
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .event-exceprt {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .event-time {
+            color: #888;
+            font-size: 14px;
+        }
+
+            .event-time a {
+                color: #888;
+                text-decoration: none;
+                margin-right: 10px;
+            }
+
+                .event-time a i {
+                    margin-right: 5px;
+                }
+
+        /* Highlight Carousel */
+        .highlight-layout-1 {
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .highlight-layout-1 figure img {
+                width: 100%;
+                height: auto;
+            }
+
+            .highlight-layout-1 h5 a {
+                color: #333;
+                font-size: 18px;
+                text-decoration: none;
+            }
+
+            .highlight-layout-1 div {
+                color: #666;
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .highlight-layout-1 .btn {
+                margin-top: 10px;
+            }
+
+        /* Counter Block */
+        .counter-block-1 {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .counter {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .icon {
+            font-size: 40px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+
+        .section-secondary-bg {
+            background-color: #f8f9fa;
+        }
+
+        .section-custom-bg {
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        .section-heading-wrapper h2 {
+            margin-bottom: 20px;
+        }
+
+        .section-heading-wrapper h4 {
+            color: #666;
+        }
+
+        .btn-theme {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-theme-invert {
+            background-color: #fff;
+            color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+        .btn-small {
+            padding: 5px 10px;
+        }
+
+        .heading-separator-horizontal {
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: #007bff;
+            margin: 10px auto;
+        }
+
+        .horizontal-newsletter input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 80%;
+            margin-right: 10px;
+        }
+
+        .horizontal-newsletter button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Back to Top Button */
+        #backTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            display: none;
+        }
+
+
+        .resultcontainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .column {
+            flex-basis: 25%;
+            margin: 0 2%
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 1em;
+            margin: 7% 4% 3% auto ;
+            font-weight: bold;
+        }
+
+        .card-subtitle {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .list-group {
+            margin-bottom: 20px;
+        }
+
+        .list-group-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .list-group-item.active {
+                background-color: #337ab7;
+                color: #fff;
+            }
+
+            .list-group-item:hover {
+                background-color: #f5f5f5;
+                cursor: pointer;
+            }
+
+
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            .table th, .table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .table th {
+                background-color: #f0f0f0;
+            }
+
+            .table tr:nth-child(even) {
+                background-color: #f5f5f5;
+            }
+
+            .table tr:hover {
+                background-color: #eee;
+            }
+        .section-heading-wrapper .text-left h2 {
+            text-align: right;
+            clear: both;
+        }
+        .section-heading-wrapper .text-left p, .section-heading-wrapper .text-left h4 {
+            text-align: right;
+        }
+
+        .partycontainer {
+            display: flex;
+            gap: 10px;
+            font-weight:400;
+            flex-wrap: wrap;
+            justify-content: center;
+            direction:rtl !important;
+        }
+            .partycontainer p {
+                font-size:1.2em;
+                font-weight: 600;
+            
+            }
+            .partycontainer .card {
+                margin: 20px;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: calc(33.33% - 20px);
+            }
+
+            .partycontainer .card-header {
+                background-color: #f0f0f0;
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+                .partycontainer .card-header h3, .card-header h4 {
+                    margin: 0;
+                }
+
+        .partycontainer .card-body {
+            padding: 20px;
+        }
+
+        .partycontainer .card-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .partycontainer .card-body li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .partycontainer .card-body li:last-child {
+                border-bottom: none;
+            }
+
+        p {
+            text-align:right !important;
+            direction: rtl !important
+        }
+        
+        .local_result {
+            text-align: center;
+            padding: 2% 3%;
+            direction:rtl;
+        }
+
+        .date_container th{
+            text-align:center !important;
+            font-size:1.3em;
+            font-weight:bolder;
+        }
+        .date_container td {
+            font-weight: bold;
+            text-align: center !important;
+        }
+        .theme-custom-box-animation {
+            width: 70% !important;
+            height: auto !important;
+        }
+        .date_container p{
+            
+        }
+        .date_container {
+            margin-left: 24% !important;
+        
+        }
+        .adscontainer {
+            width: 85% !important;
+            height: 100vh !important;
+        }
+
+            .adscontainer img {
+                margin: 8% -14% -50% 0% !important;
+                border-radius: 20% !important;
+                width: 90% !important;
+                height: 26vh !important;
+            }
+
+            .adscontainer a {
+                
+                margin-bottom:-20% !important;
+            }
+        .section-content-block {
+            padding: 49px 0 100px 0;
+            background: #fff;
+            height: 100vh;
+        }
+        .section-content-block {
+            padding: 49px 0 100px 0;
+            background: #fff;
+            height: fit-content;
+        }
+    </style>
+
+
+</head>
+<body style="background-color: #f9fafb !important;">
+    <!--  HOME SLIDER BLOCK  -->
+
+    <div class="slider-wrap">
+        <div id="slider_1" class="owl-carousel" data-nav="false" data-dots="true" data-autoplay="true" data-autoplaytimeout="50000">
+
+            <!--  Start First Slider Item  -->
+            <div class="slider_item_container" data-bg_color="#264676" data-bg_opacity="0.1">
+                <video class="background-video" autoplay loop muted playsinline>
+                    <source src="~/Content/images/elect.mp4" type="video/mp4">
+                    <div class="item">
+                        <div class="slider-content">
+                            <div class="container text-left">
+                                <div class="row">
+                                    <div class="slider-bg" data-animation-in="fadeInUp" data-animation-out="fadeInRight">
+                                        <div class="col-sm-12 wow fadeInUp" data-wow-duration="1s">
+                                        </div>
+                                    </div> <!-- end .col-sm-12  -->
+                                </div> <!-- end .row  -->
+                            </div><!-- end .container -->
+                        </div> <!--  end .slider-content -->
+                    </div> <!-- end .item  -->
+            </div> <!-- end .slider_item_container  -->
+            <!--  End First Slider Item  -->
+            <!--  Start Second Slider Item  -->
+            <div class="slider_item_container" data-bg_img="Content/images/king.jpg" data-bg_color="#111111" data-bg_opacity="0.5">
+                <div class="item">
+                    <div class="slider-content">
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="slider-bg" data-animation-in="fadeInLeft" data-animation-out="zoomInDown">
+                                    <div class="col-sm-6 wow fadeInLeft" data-wow-duration="1s">
+                                        <h3>كن جزءًا من التغيير </h3>
+                                        <h2>
+                                            !متحدين نقف، متفرقين نسقط
+                                        </h2>
+                                        <a href="@Html.ActionLink("Login","USER")" class="btn btn-theme btn-theme margin-top-24">تسجيل الدخول</a>
+                                        <a href="#" class="btn btn-theme btn-theme-invert margin-top-24">الاستعلام عن الخدمات</a>
+                                    </div>
+                                </div> <!-- end .col-sm-12  -->
+                            </div> <!-- end .row  -->
+                        </div><!-- end .container -->
+                    </div> <!--  end .slider-content -->
+                </div> <!-- end .item  -->
+            </div> <!-- end .slider_item_container  -->
+            <!--  End Second Slider Item  -->
+        </div> <!-- end .slider_1  -->
+    </div> <!-- end .slider-wrap.  -->
+    <!-- end .slider-wrap.  -->
+    <!--  ABOUT US SECTION  -->
+    <!--<section class="section-content-block section-pure-white-bg">
+
+        <div class="container wow slideInUp" id="cardContainer" style="justify-content:center; width:100% !important; padding-left:8%;">
+
+            <div class="row section-heading-wrapper">
+
+                <div class="col-md-12 col-sm-12 text-center no-img-separator">
+                    <h2 class="extra-large"> عن الانتخابات </h2>
+                    <span class="heading-separator heading-separator-horizontal"></span>
+                    <h4></h4>
+
+                </div> <!-- end .col-sm-12  -->
+    <!--</div>
+
+    <div class="row">
+
+        <div class="highlight-carousel text-center owl-carousel" data-nav="false" data-dots="true" data-autoplaytimeout="70000">
+
+
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="highlight-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+                    <figure><img src="~/Content/images/enti5ab.png" alt="highlights"></figure>
+                    <h5><a href="#">الهيئة المستقلة للإنتخاب</a></h5>
+                    <div> .أنشئت الهيئة بموجب قانون الهيئة المستقلة للانتخاب رقم (11) لسنة (2012). كهيئة مستقلة، وقد أسند لها مسؤولية الإشراف على العملية الانتخابية النيابية في كل مراحلها</div>
+                    <br />
+                    <a href="/Home/button1" class="btn btn-theme btn-small theme-custom-box-shadow">إقرأ المزيد <i class="fa fa-long-arrow-right"></i></a>
+                    <br />
+                    <br />
+                </div>-->
+    <!--  end .main_highlights  -->
+    <!--</div>--> <!--  end .col-md-3  -->
+    <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="highlight-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+            <figure><img src="~/Content/images/download.jfif" alt="highlight"></figure>
+            <h5>
+                <a href="#">
+                    شروط الترشح
+                </a>
+            </h5>
+            <div>
+                يشترط فيمن يرغب بالترشح لعضوية مجلس النواب <br> حسب المادة  (10)  ما يلي
+            </div>
+            <br />
+            <br />
+            <a href="pdf/شروط ومرفقات طلب الترشح للدائرة الانتخابية (العامة_محلية) 2024_1-merged.pdf" class="btn btn-theme btn-small theme-custom-box-shadow" download="شروط ومرفقات طلب الترشح للدائرة الانتخابية (العامة_محلية) 2024_1-merged.pdf">إقرأ المزيد <i class="fa fa-long-arrow-right"></i></a>
+            <br /><br />
+        </div>-->
+    <!--  end .main_highlights  -->
+    <!--</div>--> <!--  end .col-md-3  -->
+    <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="highlight-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+            <figure><img src="~/Content/images/2024vote.png" alt=""></figure>
+            <h5>
+                <a href="#">
+                    النماذج المطلوبة للترشح للدائرة الانتخابية العامة
+                </a>
+            </h5>
+            <div>انطلقوا معنا في رحلة انتخابية مميزة، حيث نجعل الترشح والتصويت أسهل من أي وقت مضى. نقدم لكم النماذج المطلوبة للترشح للدائرة الانتخابية العامة لضمان سير عملية الترشح بسلاسة ونجاح.</div>
+
+            <a href="#" class="btn btn-theme btn-small theme-custom-box-shadow">إقرأ المزيد  <i class="fa fa-long-arrow-right"></i></a>
+            <br />
+
+        </div>-->
+    <!--  end .main_highlights  -->
+    <!--</div>--> <!--  end .col-md-3  -->
+    <!--</div>
+
+        </div>
+
+    </div>-->
+    <!--  end .container  -->
+
+    <!--@*</section>*@-->
+    <!--  ABOUT US SECTION  -->
+
+    <section class="section-content-block section-pure-white-bg">
+
+        <div class="container wow slideInUp">
+
+            <div class="row section-heading-wrapper">
+
+                <div class="col-md-12 col-sm-12 text-center no-img-separator">
+                    <h2 class="extra-large">معلومات عن الانتخابات والعملية الانتخابية </h2>
+                    <span class="heading-separator heading-separator-horizontal"></span>
+                    <h4>لمزيد من المعلومات يمكن الإطلاع على البيانات ادناه</h4>
+
+                </div> <!-- end .col-sm-12  -->
+
+            </div>
+
+            <div class="row">
+
+                <div class="highlight-carousel text-center owl-carousel" data-nav="false" data-dots="true" data-autoplaytimeout="70000">
+
+
+
+
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="highlight-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+                            <figure><img src="/images/enti5ab.png" alt="highlights"></figure>
+                            <h5><a href="#">الهيئة المستقلة للإنتخاب</a></h5>
+                            <div> .أنشئت الهيئة بموجب قانون الهيئة المستقلة للانتخاب كهيئة مستقلة، وقد أسند لها مسؤولية الإشراف على العملية الانتخابية النيابية في مراحلها</div>
+                            <a href="Commission.html" class="btn btn-theme btn-small theme-custom-box-shadow">إقرأ المزيد <i class="fa fa-long-arrow-right"></i></a>
+                        </div> <!--  end .main_highlights  -->
+                    </div> <!--  end .col-md-3  -->
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="highlight-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+                            <figure><img src="~/images/download.jpg" alt="highlight"></figure>
+                            <h5>
+                                <a href="">
+                                    شروط الترشح
+                                </a>
+                            </h5>
+                            <div>
+                                يشترط فيمن يرغب بالترشح لعضوية مجلس النواب <br> حسب المادة  (10)  ما يلي
+                            </div>
+                            <a href="pdf/شروط ومرفقات طلب الترشح للدائرة الانتخابية (العامة_محلية) 2024_1-merged.pdf" class="btn btn-theme btn-small theme-custom-box-shadow" download="شروط ومرفقات طلب الترشح للدائرة الانتخابية (العامة_محلية) 2024_1-merged.pdf">إقرأ المزيد <i class="fa fa-long-arrow-right"></i></a>
+                        </div> <!--  end .main_highlights  -->
+                    </div> <!--  end .col-md-3  -->
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="highlight-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+                            <figure><img src="/images/electronic-voting.png" alt=""></figure>
+                            <h5>
+                                <a href="#">
+                                    النماذج المطلوبة للترشح للدائرة الانتخابية العامة
+                                </a>
+                            </h5>
+                            <div>يمكن معرفة النماذج المطلوبة للدوائر الانتخابية وطلبات الترشح ونماذج الاستبدال  </div>
+                            <a href="https://www.iec.jo/ar/%D8%A7%D9%84%D9%86%D9%85%D8%A7%D8%B0%D8%AC-%D8%A7%D9%84%D9%85%D8%B7%D9%84%D9%88%D8%A8%D8%A9-%D9%84%D9%84%D8%AA%D8%B1%D8%B4%D8%AD-%D9%84%D9%84%D8%AF%D8%A7%D8%A6%D8%B1%D8%A9-%D8%A7%D9%84%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D9%8A%D8%A9-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9" class="btn btn-theme btn-small theme-custom-box-shadow">إقرأ المزيد  <i class="fa fa-long-arrow-right"></i></a>
+                        </div> <!--  end .main_highlights  -->
+                    </div> <!--  end .col-md-3  -->
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="highlight-layout-1 theme-custom-box-shadow theme-custom-box-animation ">
+                            <figure><img src="/images/eVoting-01.png" alt=""></figure>
+                            <h5>
+                                <a href="#">
+                                    بيانات المترشحين لانتخابات مجلس النواب 2024
+                                </a>
+                            </h5>
+                            <div>للاطلاع على قوائم المرشحين الأولية لانتخابات مجلس النواب 2024 </div>
+                            <a href="pdf/بيانات المترشحين_0.xlsx" class="btn btn-theme btn-small theme-custom-box-shadow" download="pdf/بيانات المترشحين_0.xlsx">إقرأ المزيد </a>
+                        </div> <!--  end .main_highlights  -->
+                    </div> <!--  end .col-md-3  -->
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="highlight-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+                            <figure><img src="/images/vource.png" alt="highlight"></figure>
+                            <h5>
+                                <a href="#">
+                                    جداول الناخبين النهائية لانتخابات مجلس النواب 2024
+                                </a>
+                            </h5>
+                            <div>جداول الناخبين النهائية لمجلس النواب 2024</div>
+                            <a href="https://www.iec.jo/ar/%D9%84%D9%85%D8%B9%D8%B1%D9%81%D8%A9-%D8%AF%D8%A7%D8%A6%D8%B1%D8%AA%D9%83-%D8%A7%D9%84%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D9%8A%D8%A9-%D8%AD%D8%B3%D8%A8-%D8%AC%D8%AF%D8%A7%D9%88%D9%84-%D8%A7%D9%84%D9%86%D8%A7%D8%AE%D8%A8%D9%8A%D9%86-%D8%A7%D9%84%D9%86%D9%87%D8%A7%D8%A6%D9%8A%D8%A9-%D9%84%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA-%D9%85%D8%AC%D9%84%D8%B3-%D8%A7%D9%84%D9%86%D9%88%D8%A7%D8%A8-2024" class="btn btn-theme btn-small theme-custom-box-shadow">إقرأ المزيد  <i class="fa fa-long-arrow-right"></i></a>
+                        </div> <!--  end .main_highlights  -->
+                    </div> <!--  end .col-md-3  -->
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="highlight-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+                            <figure><img src="/images/law.jpg" alt="highlight" class=" img-shadow"></figure>
+                            <h5><a href="#">قانون الانتخاب لمجلس النواب رقم (4) لسنة 2022</a></h5>
+                            <div>
+                                قانون رقم 4 لسنة 2022
+                                قانون االنتخاب لمجلس النواب
+                            </div>
+                            <a href="pdf/قانون الانتخاب لمجلس النواب رقم (4) لسنة 2022.pdf" class="btn btn-theme btn-small theme-custom-box-shadow" download="pdf/قانون الانتخاب لمجلس النواب رقم (4) لسنة 2022.pdf">إقرأ المزيد<i class="fa fa-long-arrow-right"></i></a>
+                        </div> <!--  end .main_highlights  -->
+                    </div> <!--  end .col-md-3  -->
+
+                </div>
+
+            </div>
+
+        </div> <!--  end .container  -->
+
+    </section>
+
+
+
+
+
+    <div class="container" style="margin-top: 174px;" style="direction: rtl; text-align: right; font-family: Arial, sans-serif;">
+        <h2 style="text-align: center; margin-bottom: 30px;">مواعيد الانتخابات</h2>
+        <br />
+        <br />
+        <br />
+
+
+    </div>
+    <div class="date_container" style="text-align:center !important; width:50%; position:center !important;">
+        @*Include the Local Result Partial View*@
+        @Html.Action("Index", "DATEs")
+    </div>
+
+
+
+
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+
+
+
+
+    <div class="local_result" style=" font-size: 1.2em !important; font-weight: bold !important; ">
+
+        <h2 style="text-align:center;">نتائج الانتخابات المحلية </h2>
+        <br />
+        <br />
+        @*Include the Local Result Partial View*@
+        @Html.Action("LocalResult", "Result")
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+
+
+    <br />
+    <br />
+
+
+
+
+
+    <div>
+        <h2 style="text-align:center;">نتائج الانتخابات الحزبية  </h2>
+        <br />
+        <br />
+        @*Include the Local Result Partial View*@
+        @Html.Action("Index", "PartyResult")
+    </div>
+
+    <br />
+    <br />
+
+
+    <div class="container">
+        <h2 style="text-align:center;">المناظرات </h2>
+        <br />
+        <br />
+        @Html.Action("IndexDebatsesHome", "Debates1")
+    </div>
+    <br />
+    <br />
+
+
+
+    <section class="section-content-block section-secondary-bg">
+
+        <div class="container">
+
+            <!--  end .row  -->
+
+            <div class="row wow fadeIn margin-top-24">
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                    <div class="counter-block-1 text-center">
+                        <i class="fa fa-check icon"></i>
+                        @*<i class="fa fa-gavel icon"></i>*@
+                        <span class="counter">2578</span>
+
+                        <h4 class="text-capitalize">عدد الاصوات  </h4>
+
+                    </div>
+
+                </div> <!--  end .col-lg-3  -->
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                    <div class="counter-block-1 text-center">
+
+                        <i class="fa fa-building icon"></i>
+                        <span class="counter">3235</span>
+                        <h4 class="text-capitalize"> المشاريع </h4>
+
+                    </div>
+
+                </div> <!--  end .col-lg-3  -->
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                    <div class="counter-block-1 text-center">
+                        @*<i class="fa fa-squar icon"></i>*@
+                        <i class="fa fa-users icon"></i>
+                        <span class="counter">3568</span>
+                        <h4 class="text-capitalize">المساهمين النشطين </h4>
+
+                    </div>
+
+                </div> <!--  end .col-lg-3  -->
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                    <div class="counter-block-1 text-center">
+
+                        <i class="fa fa-building icon"></i>
+                        <span class="counter">1364</span>
+                        <h4 class="text-capitalize">البرلمان </h4>
+
+                    </div>
+
+                </div> <!--  end .col-lg-3  -->
+
+
+            </div> <!-- end row  -->
+
+        </div> <!--  end .container -->
+
+    </section>  <!--  end .appointment-section  -->
+
+    <section class="section-content-block" dir="rtl">
+
+        <div class="container wow slideInUp" dir="rtl">
+
+            <div class="row section-heading-wrapper">
+
+                <div class="col-md-12 col-sm-12 text-left no-img-separator">
+                    <h2>الاعلانات </h2>
+                    <h4>
+                        مكانكم الأمثل لعرض حملاتكم الانتخابية وتحقيق تواصل فعّال مع جمهور واسع وتعزيز تواجدكم الانتخابي .
+
+                    </h4>
+                </div> <!-- end .col-sm-12  -->
+
+            </div> <!-- end .row  -->
+
+            <div class="row">
+
+                <div class="adscontainer">
+                    @*Include the Local Result Partial View*@
+                    @Html.Action("Publishs", "Ads")
+                </div>
+
+                @*<div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <a class="btn btn-theme margin-top-48" href="#">Load All Campaigns</a>
+                        </div>
+                    </div>*@
+
+            </div> <!--  end .container  -->
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a id="backTop">Back To Top</a>
+
+    <script src="@Url.Content("/Content/libs/jquery/scripts/jquery.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/bootstrap/scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/wow/scripts/wow.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/jquery.backTop/scripts/jquery.backTop.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/waypoints/scripts/waypoints.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/waypoints/scripts/waypoints-sticky.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/owl.carousel/scripts/owl.carousel.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/jquery.stellar/scripts/jquery.stellar.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/jquery.counterup/scripts/jquery.counterup.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/venobox/scripts/venobox.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/jquery.countdown/scripts/jquery.countdown.min.js")"></script>
+    <script src="@Url.Content("/Content/js/custom-scripts.js")"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+
+</body>

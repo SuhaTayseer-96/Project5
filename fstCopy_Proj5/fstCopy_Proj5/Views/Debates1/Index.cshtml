@@ -1,0 +1,51 @@
+﻿@model IEnumerable<fstCopy_Proj5.Models.Debate>
+
+@{
+    ViewBag.Title = "Debates Administration";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">Debates Administration</h2>
+        @Html.ActionLink("Create New Debate", "Create", null, new { @class = "btn btn-success" })
+    </div>
+
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Circle_ID)</th>
+                <th>@Html.DisplayNameFor(model => model.Date_Of_Debate)</th>
+                <th>@Html.DisplayNameFor(model => model.Topic)</th>
+                <th>@Html.DisplayNameFor(model => model.First_Candidate)</th>
+                <th>@Html.DisplayNameFor(model => model.First_Candidate_List)</th>
+                <th>@Html.DisplayNameFor(model => model.Second_Candidate)</th>
+                <th>@Html.DisplayNameFor(model => model.Second_Candidate_List)</th>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <th>@Html.DisplayNameFor(model => model.Zoom_link)</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Circle_ID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Date_Of_Debate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Topic)</td>
+                    <td>@Html.DisplayFor(modelItem => item.First_Candidate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.First_Candidate_List)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Second_Candidate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Second_Candidate_List)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Zoom_link)</td>
+                    <td class="text-center">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" }) 
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-sm btn-info" }) 
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-sm btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

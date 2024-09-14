@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="de4029bcdc174f26bfaa1ff586fbeeaf" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="ElectionModel.Ad" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.Admin" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.Contact" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.DATE" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.Debate" Width="2.125" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.LocalList" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.LocalListCandidate" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.Payment" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectionModel.User" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="ElectionModel.FK__LocalList__Local__4D94879B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ElectionModel.GeneralListCandidate" Width="1.5" PointX="11.625" PointY="5" />
+        <EntityTypeShape EntityType="ElectionModel.GeneralListing" Width="1.5" PointX="9.375" PointY="5" />
+        <AssociationConnector Association="ElectionModel.FK__GeneralLi__Gener__70DDC3D8" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "Map";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خرائط الدوائر الانتخابية</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="container">
+        <h3>خرائط الدوائر الانتخابية ومراكز الاقتراع للانتخابات النيابية 2024</h3>
+
+        <div class="row">
+            @*Sidebar for dropdowns*@
+            <div class="col-md-6">
+                @*City Dropdown*@
+                <div class="mb-3">
+                    <label for="city" class="form-label">اختر المدينة</label>
+                    <select id="city" class="form-select">
+                        <option value="">اختر المدينة</option>
+                        <option value="irbid">إربد</option>
+                        <option value="ajloun">عجلون</option>
+                    </select>
+                </div>
+
+                @*District Dropdown*@
+                <div class="mb-3">
+                    <label for="district" class="form-label">اختر الدائرة</label>
+                    <select id="district" class="form-select" disabled>
+                        <option value="">اختر الدائرة</option>
+                    </select>
+                </div>
+
+                @*Election Information Section*@
+                <div id="election-info" class="mt-4"></div>
+            </div>
+
+            @*Map Section*@
+
+            <div class="col-md-6">
+                <script src="~/myMap/mapdata.js"></script>
+                <script src="~/myMap/countrymap.js"></script>
+                <div id="map"></div>
+            </div>
+            <div class="map-container">
+                SVG Map of Jordan
+                <svg id="jordan-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" style=" display : none">
+                    Paths representing regions
+                    <path id="irbid" d="M200,200 L400,200 L400,400 L200,400 Z" fill="#ccc" stroke="#333" stroke-width="2"></path>
+                    <path id="ajloun" d="M400,200 L600,200 L600,400 L400,400 Z" fill="#ccc" stroke="#333" stroke-width="2"></path>
+                    Add more paths for other regions
+                </svg>
+                <div id="map-info" class="map-info">اختر مدينة ودائرة لعرض المعلومات</div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        // Data for election information
+        const electionData = {
+            irbid: {
+                "اربد الاولى": {
+                    المحافظة: "إربد",
+                    الدائرة: "الدائرة الاولى",
+                    مراكز_الإقتراع: 103,
+                    صناديق_الذكور: 174,
+                    صناديق_الإناث: 184,
+                    ناخبين_الذكور: "155,410",
+                    ناخبين_الإناث: "170,508",
+                    مقترعين_الذكور: "31.6935%",
+                    مقترعين_الإناث: "38.3219%",
+                    المقاعد: 6
+                },
+                "اربد الثانية": {
+                    المحافظة: "إربد",
+                    الدائرة: "الدائرة الثانية",
+                    مراكز_الإقتراع: 62,
+                    صناديق_الذكور: 87,
+                    صناديق_الإناث: 92,
+                    ناخبين_الذكور: "66,095",
+                    ناخبين_الإناث: "78,788",
+                    مقترعين_الذكور: "46.7800%",
+                    مقترعين_الإناث: "57.8410%",
+                    المقاعد: 4
+                }
+            },
+            ajloun: {
+                "محافظة عجلون": {
+                    المحافظة: "عجلون",
+                    الدائرة: "محافظة عجلون",
+                    مراكز_الإقتراع: 46,
+                    صناديق_الذكور: 66,
+                    صناديق_الإناث: 80,
+                    ناخبين_الذكور: "43,476",
+                    ناخبين_الإناث: "57,636",
+                    مقترعين_الذكور: "55.6701%",
+                    مقترعين_الإناث: "62.6714%",
+                    المقاعد: 4
+                }
+            }
+        };
+
+        // Select DOM elements
+        const citySelect = document.getElementById('city');
+        const districtSelect = document.getElementById('district');
+        const electionInfoDiv = document.getElementById('election-info');
+        const jordanMap = document.getElementById('jordan-map');
+        const mapInfoDiv = document.getElementById('map-info');
+
+        // Highlighting map areas dynamically
+        const svgPaths = {
+            irbid: document.getElementById('irbid'),
+            ajloun: document.getElementById('ajloun')
+        };
+
+        // Event listener for city selection
+        citySelect.addEventListener('change', function () {
+            const selectedCity = citySelect.value;
+
+            // Reset the district dropdown and disable it if no city is selected
+            districtSelect.innerHTML = '<option value="">اختر الدائرة</option>';
+            districtSelect.disabled = selectedCity === '';
+
+            // Clear previous highlights
+            for (const path of Object.values(svgPaths)) {
+                path.classList.remove('highlight');
+            }
+
+            // Highlight the corresponding map area
+            if (selectedCity && svgPaths[selectedCity]) {
+                svgPaths[selectedCity].classList.add('highlight');
+                mapInfoDiv.textContent = `اختيار: ${citySelect.options[citySelect.selectedIndex].text}`;
+            } else {
+                mapInfoDiv.textContent = 'اختر مدينة ودائرة لعرض المعلومات';
+            }
+
+            // Populate districts based on selected city
+            if (selectedCity) {
+                const districts = Object.keys(electionData[selectedCity]);
+                districts.forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+            احالؤ
+            // Clear election info
+            electionInfoDiv.innerHTML = '';
+        });
+
+        // Event listener for district selection
+        districtSelect.addEventListener('change', function () {
+            const selectedCity = citySelect.value;
+            const selectedDistrict = districtSelect.value;
+
+            // Clear previous election info
+            electionInfoDiv.innerHTML = '';
+
+            // Display election info for the selected district
+            if (selectedDistrict) {
+                const data = electionData[selectedCity][selectedDistrict];
+                let infoHtml = '<table class="table table-bordered">';
+                for (let key in data) {
+                    infoHtml += `<tr><th>${key}</th><td>${data[key]}</td></tr>`;
+                }
+                infoHtml += '</table>';
+                electionInfoDiv.innerHTML = infoHtml;
+            }
+        });
+    </script>
+
+</body>
+</html>
+<style>
+        .container {
+            /*            margin-top: 50px;
+    */ direction: rtl; /* For right-to-left layout */
+        }
+
+        h3 {
+            text-align: center;
+        }
+        /* Style for highlighting map areas */
+        .highlight {
+            fill: red !important;
+        }
+
+        svg {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border: 1px solid #ddd;
+        }
+
+        .map-container {
+            position: relative;
+        }
+
+        .map-info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+</style>

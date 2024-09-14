@@ -1,0 +1,35 @@
+﻿@model fstCopy_Proj5.Models.GeneralListing
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GeneralListing</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GeneralListingID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GeneralListingID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfVotes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfVotes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Name }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

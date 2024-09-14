@@ -1,0 +1,90 @@
+﻿@model IEnumerable<fstCopy_Proj5.Models.GeneralListCandidate>
+
+@{
+    ViewBag.Title = "المرشحين";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2>طلبات ترشح قائمة الحزب</h2>
+
+<div class="filter-form">
+    @using (Html.BeginForm("Index", "GeneralListCandidates", FormMethod.Get, new { id = "filterForm" }))
+    {
+        <div class="form-group">
+            @Html.Label("اسم القائمة العامة")
+            @Html.DropDownList("generalListingName", ViewBag.GeneralListingName as SelectList, "اختر", new { @class = "form-control", @onchange = "document.getElementById('filterForm').submit();" })
+        </div>
+        <div class="form-group">
+            @Html.CheckBox("onlyAccepted", (ViewBag.OnlyAccepted as bool?) ?? false, new { @onchange = "document.getElementById('filterForm').submit();" })
+            @Html.Label("فقط المقبولين")
+        </div>
+    }
+</div>
+
+<table class="table table-borderless table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("اسم المرشح")
+            </th>
+            <th>
+                @Html.DisplayName("البريد الإلكتروني")
+            </th>
+            <th>
+                @Html.DisplayName("اسم القائمة العامة")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string rowClass = item.Status == "1" ? "accepted-bg" : item.Status == "0" ? "rejected-bg" : "";
+
+            <tr class="@rowClass">
+                <td>
+                    <small class="mb-0 text-muted">
+                        @Html.DisplayFor(modelItem => item.CandidateName)
+                    </small>
+                </td>
+                <td>
+                    <small class="mb-0 text-muted">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </small>
+                </td>
+                <td>
+                    <small class="mb-0 text-muted">
+                        @Html.DisplayFor(modelItem => item.GeneralListing.Name)
+                    </small>
+                </td>
+                <td>
+                    @using (Html.BeginForm("UpdateStatus", "GeneralListCandidates", FormMethod.Post, new { @style = "display:inline;" }))
+                    {
+                        @Html.Hidden("CandidateID", item.CandidateID)
+                        @Html.DropDownList("Status", new SelectList(new[]
+                        {
+                            new SelectListItem { Text = "اختر", Value = "" },
+                            new SelectListItem { Text = "قبول", Value = "1" },
+                            new SelectListItem { Text = "رفض", Value = "0" }
+                        }, "Value", "Text", item.Status), new { @class = "form-control", @onchange = "this.form.submit();" })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    .accepted-bg {
+        background-color: #d4edda;
+    }
+
+    .rejected-bg {
+        background-color: #f8d7da;
+    }
+
+    table th, table td {
+        text-align: right;
+        direction: rtl;
+    }
+</style>

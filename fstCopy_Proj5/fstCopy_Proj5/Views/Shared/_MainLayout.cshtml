@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "Political Buddies - Election Campaign & Activism";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Political Buddies - Election Campaign & Activism HTML5 Template">
+    <meta name="author" content="xenioushk">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- The styles -->
+    <link href="@Url.Content("/Content/libs/bootstrap/styles/bootstrap.min.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("/Content/libs/font-awesome/font-awesome.min.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("/Content/libs/animate/styles/animate.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("/Content/libs/owl.carousel/styles/owl.carousel.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("/Content/libs/owl.carousel/styles/owl.theme.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("/Content/libs/venobox/styles/venobox.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("/Content/css/styles.css")" rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet" />
+
+
+    <style>
+        img {
+            max-width: 100%;
+        }
+    </style>
+    @RenderSection("head", required: false)
+    <title>@ViewBag.Title</title>
+</head>
+
+
+
+<body>
+    <!-- HEADER -->
+    <header class="main-header clearfix" data-sticky_header="true">
+        <div class="top-bar hidden-xs hidden-sm visible-lg visible-md clearfix">
+            <div class="container" style="background-color:darkgreen;">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <p>
+                            <span><i class="fa fa-phone"></i> +962 790 000 000  </span> <strong> : للتواصل معنا </strong>
+                            <span>&nbsp;<i class="fa fa-envelope-o"></i>  support@site.com</span><strong> : البريد الالكتروني </strong>
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="top-bar-social">
+                            <a href="#"><i class="fa fa-facebook rounded-box"></i></a>
+                            <a href="#"><i class="fa fa-twitter rounded-box"></i></a>
+                            <a href="#"><i class="fa fa-pinterest rounded-box"></i></a>
+                            <a href="#"><i class="fa fa-instagram rounded-box"></i></a>
+                            <a href="#"><i class="fa fa-youtube rounded-box"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                        <a href="@Url.Action("Login", "USER")" class="free-estimate">تسجيل الدخول</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-wrapper navigation-wrapper">
+            <div class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="logo" href="@Url.Action("Index", "Home")">
+                            <img alt="" src="@Url.Content("/images/logo.png")">
+                        </a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>@Html.ActionLink("من نحن", "About", "Home")</li>
+                            <li>@Html.ActionLink("تواصل معنا", "CreateContact", "Contact")</li>
+                            <li>@Html.ActionLink("الأسئلة الشائعة", "Faq", "Home")</li>
+                            <li>@Html.ActionLink("البحث عن الرقم الوطني", "Search", "Home")</li>
+
+                           
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">الخدمات <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenu">
+
+
+                                    <li>@Html.ActionLink("طلب الترشح المحلي", "CreateList", "LocalListCandidates")</li>
+                                    <li>@Html.ActionLink("طلب الترشح الحزبي", "GeneralListCandidates", "GeneralListings")</li>
+                                    <li>@Html.ActionLink("طلب الإعلان", "addAdvertisement", "Ads")</li>
+                                    <li>@Html.ActionLink("طلب المناظرات", "Create", "Debates1")</li>
+                            </li>
+
+
+
+                        </ul>
+
+                        <li>@Html.ActionLink("الصفحة الرئيسية", "Index", "Home")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <!-- START FOOTER -->
+    <footer>
+        <section class="footer-widget-area footer-widget-area-bg section-custom-bg" data-bg_img="/Content/images/blue.jpg" data-bg_opacity="0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="about-footer">
+                            <div class="row">
+                                <div class="col-lg-10 col-lg-offset-1">
+                                    <figure>
+                                        <img src="@Url.Content("~/images/loginimg.png")" alt="الشعار">
+                                    </figure>
+                                    <p>
+                                        نحن أكبر وأوثق حزب سياسي ديمقراطي في العالم. لقد كنا نعمل منذ عام 1973 برؤية مرموقة لتقديم الخدمة. نحن نعمل عالميًا، وننظم حملات سياسية لتعزيز الوعي بالسلام والسعادة.
+                                    </p>
+                                    <div class="footer-social-icons">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-instagram"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="footer-widget">
+                            <div class="footer-widget-header">
+                                <h3>اشترك معنا</h3>
+                            </div>
+                            <p>اشترك في نشرتنا الإخبارية وابقَ على اطلاع بآخر أخبارنا.</p>
+                            <div class="footer-subscription">
+                                <input id="mc4wp_email" class="form-control" placeholder="أدخل بريدك الإلكتروني" name="EMAIL" type="email">
+                                <input class="btn btn-default" value="اشترك الآن" type="submit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="footer-widget">
+                            <div class="footer-widget-header">
+                                <h3>روابط مباشرة</h3>
+                            </div>
+                            <ul class="footer-useful-links">
+                                <li>@Html.ActionLink("الصفحة الرئيسية", "Index", "Home")</li>
+                                <li>@Html.ActionLink("من نحن", "About", "Home")</li>
+                                <li>@Html.ActionLink("تواصل معنا", "CreateContact", "Contact")</li>
+                                <li>@Html.ActionLink("الأسئبة الشائعة", "Faq", "Home")</li>
+                                <li>@Html.ActionLink("الانتخابات النيابية", "Events", "Home")</li>
+                                <li>@Html.ActionLink("الانتخابات اللامركزية", "EventSingle", "Home")</li>
+                                <li>@Html.ActionLink("الانتخابات البلدية", "EventSingle", "Home")</li>
+                                <li>@Html.ActionLink("طلب الترشح المحلي", "CreateList", "LocalListCandidates")</li>
+                                <li>@Html.ActionLink("طلب الترشح الحزبي", "Create", "GeneralListCandidates")</li>
+                                <li>@Html.ActionLink("طلب الإعلان", "addAdvertisement", "Ads")</li>
+                                <li>@Html.ActionLink("طلب المناظرات", "Create", "Debates1")</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="footer-widget">
+                            <div class="footer-widget-header">
+                                <h3>تواصل معنا</h3>
+                            </div>
+                            <div class="textwidget">
+                                <i class="fa fa-envelope-o fa-contact"></i>
+                                <p><a href="mailto:support@donation.com">support@donation.com</a><br><a href="mailto:helpme@donation.com">helpme@donation.com</a></p>
+                                <i class="fa fa-location-arrow fa-contact"></i>
+                                <p>الطريق-2، 3/أ شرق شيفجونج<br>سيلهيت-3100، بنغلاديش</p>
+                                <i class="fa fa-phone fa-contact"></i>
+                                <p>المكتب: (+880) 0823 560 433<br>الجوال: (+880) 0723 161 343</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="@Url.Content("/Content/libs/owl.carousel/owl.carousel.min.js")"></script>
+    <script src="@Url.Content("/Content/libs/venobox/venobox.min.js")"></script>
+    <script src="@Url.Content("/Content/js/scripts.js")"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

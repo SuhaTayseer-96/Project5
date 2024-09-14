@@ -1,0 +1,53 @@
+﻿@model IEnumerable<fstCopy_Proj5.Models.Admin>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+
+<div style="direction:rtl !important;">
+    <h2>المسؤولين</h2>
+
+    <p>
+        @Html.ActionLink("اضافة مسؤول جديد", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Username)*@
+                اسم المستخدم
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Password)*@
+                كلمة السر
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Email)*@
+                البريد الالكتروني
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AdminID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.AdminID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.AdminID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

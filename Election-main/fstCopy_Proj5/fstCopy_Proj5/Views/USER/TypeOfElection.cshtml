@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Type Of Election";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+
+<h2 class="text-center mb-5">اختيار الدائرة الانتخابية</h2>
+
+
+<div style="display: flex; flex-direction: row; justify-content: center; align-content:center; width : 100%;">
+
+    <div class="container">
+        <div class="row">
+            @if (ViewBag.LocalElectionsPath != null)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card election-card" style="width: 20rem;">
+                        <img src="~/images/local.png" class="card-img-top" alt="دائرة غير مفعلة">
+                        <div class="card-body disabled">
+                            <h5 class="card-title ">الداوئر المحلية</h5>
+                            <button type="button" class="btn btn-light btn-block disabled">
+                                <a href="@Url.Action("LocalElections", "User")">Local Elections</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (ViewBag.PartyElectionsPath != null)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card election-card" style="width: 20rem;">
+                        <img src="~/images/general.jpg" class="card-img-top" alt="دائرة غير مفعلة">
+                        <div class="card-body ">
+                            <h5 class="card-title disabled">الدوائر العامة</h5>
+                            <button type="button" class="btn btn-light btn-block disabled">
+                                <a href="@Url.Action("PartyElections", "User")">Party Elections</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .election-card {
+        background-color: #fff; /* Red background */
+        color: rgba(0, 0, 0, 1);
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 10rem;
+    }
+    .row {
+        margin-right: 0px;
+        margin-left: 14rem;
+    }
+        .election-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .card-img-top {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        width: 100%;
+        height: 180px; /* Fixed height for images */
+        object-fit: cover;
+    }
+
+    .card-body {
+        text-align: center; /* Center align text */
+        padding: 1.25rem; /* Adjust padding to fit the card */
+    }
+
+    .card-title {
+        font-size: 18px; /* Adjust title size */
+        margin-bottom: 10px;
+    }
+
+    .btn-light {
+        background-color: #fff;
+        color: #dc3545;
+        border: none;
+        border-radius: 5px;
+    }
+
+        .btn-light:disabled {
+            background-color: #f8f9fa;
+            color: #dc3545;
+        }
+</style>

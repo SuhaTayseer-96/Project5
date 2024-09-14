@@ -1,0 +1,101 @@
+﻿@model fstCopy_Proj5.Models.LocalListCandidate
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>تفاصيل المرشح</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .custom-form .control-label {
+            text-align: right;
+        }
+
+        .custom-form .text-center {
+            text-align: center;
+        }
+
+        .custom-form .form-group label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container custom-form">
+        <h2 class="text-center">تفاصيل المرشح</h2>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-md-2">الاسم الكامل</label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.CandidateName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">الرقم الوطني</label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.NationalNumber)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">الجنس</label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Gender)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">الدين</label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Religion)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">نوع الكرسي</label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Type_Chair)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">تاريخ الميلاد</label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.BirthdateCandidate)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">المحافظة</label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Governorate)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">منطقة الانتخابات</label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.ElectionArea)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">حالة الطلب</label>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Status)
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+</body>
+</html>

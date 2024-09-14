@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "ThankYou";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>شكراً لك</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            background-color: #f8f9fa;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .thank-you-container {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .thank-you-container h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .thank-you-container p {
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
+
+        .btn-red {
+            background-color: #d9534f;
+            border-color: #d43f3a;
+            color: #fff;
+        }
+
+            .btn-red:hover {
+                background-color: #c9302c;
+                border-color: #ac2925;
+                color: #fff;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="thank-you-container text-center">
+            <h2>شكراً لتقديم طلبك</h2>
+            <p>تم تقديم طلبك بنجاح. سنقوم بمراجعته والاتصال بك في حال تم الموافقة على طلبك.</p>
+            <div>
+                @Html.ActionLink("العودة إلى الصفحة الرئيسية", "Index", "Home", null, new { @class = "btn btn-red" })
+            </div>
+        </div>
+    </div>
+</body>
+</html>

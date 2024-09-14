@@ -1,0 +1,208 @@
+﻿@model fstCopy_Proj5.Models.LocalListCandidate
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>نموذج تقديم طلب الترشح</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #ffffff;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .header img {
+                max-width: 150px;
+            }
+
+            .header h2 {
+                font-size: 28px;
+                font-weight: bold;
+                text-align: center;
+                flex: 1;
+            }
+
+        .form-container {
+            border-top: 2px solid red;
+            padding-top: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            text-align: right;
+            float: right; /* يجعل الليبل يظهر على اليمين */
+        }
+
+        .form-control {
+            text-align: right;
+            direction: rtl;
+            margin-bottom: 15px;
+            height: calc(3rem + 10px); /* تكبير ارتفاع الحقول */
+            padding: 10px;
+            font-size: 18px; /* تكبير حجم الخط داخل الحقول */
+        }
+
+        .btn-primary {
+            background-color: #d9534f;
+            border-color: #d43f3a;
+            color: #fff;
+            width: 100%;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+            .btn-primary:hover {
+                background-color: #c9302c;
+                border-color: #ac2925;
+            }
+
+        .text-center .btn-default {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            color: #333;
+            width: 100%;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container custom-form">
+        <div class="card">
+            <div class="header">
+                <img src="~/images/share-image.png" alt="Logo">
+                <h2>نموذج تقديم طلب الترشح</h2>
+            </div>
+
+            @using (Html.BeginForm("Create", "LocalListCandidates", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal form-container">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">اسم المفوض بالكامل</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CandidateName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CandidateName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الرقم الوطني</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NationalNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NationalNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الجنس</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Gender, ViewBag.Genders as SelectList, "اختر الجنس", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">الدين</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Religion, ViewBag.Religions as SelectList, "اختر الديانة", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Religion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">نوع الكرسي</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Type_Chair, ViewBag.TypeChairs as SelectList, "اختر نوع الكرسي", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Type_Chair, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">البريد الإلكتروني</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">تاريخ الميلاد</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.BirthdateCandidate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BirthdateCandidate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">المحافظة</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Governorate, ViewBag.Governorates as SelectList, "اختر المحافظة", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Governorate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">منطقة الانتخابات</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.ElectionArea, ViewBag.ElectionAreas as SelectList, "اختر منطقة الانتخابات", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ElectionArea, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">تحميل صورة المرشح</label>
+                        <div class="col-md-10">
+                            <input type="file" name="ImageUpload" id="ImageUpload" class="form-control" />
+                            @Html.ValidationMessage("ImageUpload", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <div class="col-md-12">
+                            <input type="submit" value="الإنتقال إلى الصفحة التالية" class="btn btn-primary" />
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(model => model.LocalListingID, new { Value = ViewBag.LocalListID })
+                </div>
+            }
+
+            <div class="text-center">
+                @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+</body>
+</html>

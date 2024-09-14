@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "LoginUser";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-image-container">
+            <img src="~/images/king.jpg" alt="Login Image" class="login-image" />
+        </div>
+
+        <div class="login-form">
+            <h2 class="login-title">تسجيل الدخول </h2>
+
+            @using (Html.BeginForm("LoginUser", "User", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label>الرقم الوطني</label>
+                    @Html.TextBox("NationalNumber", (string)ViewBag.NationalNumber, new { @class = "form-control", placeholder = "أدخل الرقم الوطني" })
+                </div>
+
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    @Html.TextBox("Email", (string)ViewBag.Email, new { @class = "form-control", placeholder = "أدخل البريد الإلكتروني" })
+                </div>
+
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    @Html.Password("password", null, new { @class = "form-control", placeholder = "أدخل كلمة المرور" })
+                </div>
+
+                <button type="submit" class="btn btn-submit">تسجيل الدخول</button>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        direction:rtl;
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .login-card {
+        display: flex;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 800px; /* Adjust width as needed */
+        background-color: #fff;
+    }
+
+    .login-image-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+    }
+
+    .login-image {
+        width: 100%;
+        height: auto;
+        max-width: 400px; /* Adjust size as needed */
+        border-radius: 8px;
+    }
+
+    .login-form {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .login-title {
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-align: center;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #dc3545;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .btn-submit:hover {
+            background-color: #c82333;
+        }
+
+    .alert-success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+    img {
+        max-width: 100%;
+    }
+</style>

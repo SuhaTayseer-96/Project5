@@ -1,0 +1,141 @@
+﻿@model fstCopy_Proj5.Models.User
+
+@{
+    ViewBag.Title = "بحث عن الناخب";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<style>
+    .text-right {
+        border: 1px solid #dee2e6;
+        border-right: 8px solid #aedee7;
+        padding: 15px;
+        margin-bottom: 5%;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    input#NationalNumber {
+        margin-bottom: 30px !important;
+        border-radius: 5px !important;
+        height: 50px;
+        width: 100% !important;
+        font-size: 1.1rem;
+        padding: 10px;
+    }
+
+    .card-body {
+        border-right: 5px solid lightgray;
+        background-color: #ffffff;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    button.btn.btn-outline-danger {
+        width: 20%;
+        font-size: 1rem;
+        border-radius: 5px !important;
+        background-color: #C6273A;
+        color: white;
+        border: none;
+        padding: 10px 0;
+    }
+
+    label.font-weight-bold {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .img-fluid {
+        position: relative;
+        min-width: 100% !important;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .bg-primary {
+        --bs-bg-opacity: 1;
+        background-color: white !important;
+    }
+
+    .card-body {
+        min-height: 350px;
+    }
+
+    dl.row {
+        margin-top: 20px;
+    }
+
+    dt.col-sm-3 {
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    dd.col-sm-9 {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="container mt-5" dir="rtl">
+    <div class="text-right">
+        لمعرفة دائرتك الإنتخابية ادخل الرقم الوطني في الخانة التالية
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label class="font-weight-bold" style="color: #000;">الرقم الوطني :</label>
+                    <div class="mt-2">
+                        @Html.TextBoxFor(m => m.NationalNumber, new { @class = "form-control", @placeholder = "أدخل الرقم الوطني", style = "margin: 10px 0;" })
+                        @Html.ValidationMessageFor(m => m.NationalNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-danger">بحث</button>
+            }
+
+            @if (Model.FullName != null)
+            {
+                <hr />
+                <div class="row">
+                    <div class="col-md-8">
+                        <dl class="row">
+                            <dt class="col-sm-3">اسم الناخب:</dt>
+                            <dd class="col-sm-9">@Model.FullName</dd>
+
+                            <dt class="col-sm-3">الرقم الوطني:</dt>
+                            <dd class="col-sm-9">@Model.NationalNumber</dd>
+
+                            <dt class="col-sm-3">المحافظة:</dt>
+                            <dd class="col-sm-9">@Model.Governorate</dd>
+
+                            <dt class="col-sm-3">الدائرة الانتخابية:</dt>
+                            <dd class="col-sm-9">@Model.ElectionArea</dd>
+
+                            <dt class="col-sm-3">اسم مركز الاقتراع والفرز:</dt>
+                            <dd class="col-sm-9">@Model.NameOftheStation</dd>
+
+                            <dt class="col-sm-3">رقم الصندوق:</dt>
+                            <dd class="col-sm-9">@Model.FundNumber</dd>
+
+                            <dt class="col-sm-3">مكان الاقامة:</dt>
+                            <dd class="col-sm-9">@Model.PlaceOfResidence</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-md-4 text-left">
+                        <img src="@Url.Content("~/images/king_hssien.jpg")" alt="صورة" class="img-fluid" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

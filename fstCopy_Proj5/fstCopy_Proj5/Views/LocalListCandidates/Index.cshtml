@@ -1,0 +1,120 @@
+﻿@model IEnumerable<fstCopy_Proj5.Models.LocalListCandidate>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>عرض الطلبات المقدمة</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .table th, .table td {
+            text-align: right;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .form-container {
+            border-top: 2px solid red;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .form-group.text-right {
+            text-align: right;
+        }
+
+            .form-group.text-right .btn {
+                background-color: #d9534f;
+                border-color: #d43f3a;
+                color: #fff;
+            }
+
+                .form-group.text-right .btn:hover {
+                    background-color: #c9302c;
+                    border-color: #ac2925;
+                }
+
+        .page-title {
+            font-weight: bold;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container form-container">
+        <h2 class="text-center page-title">عرض الطلبات المقدمة</h2>
+
+        <!--<div class="form-group text-right">-->
+        @*@Html.ActionLink("إضافة مرشح جديد", "Create", null, new { @class = "btn btn-danger" })*@
+        <!--</div>-->
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>الاسم الكامل</th>
+                    <th>الرقم الوطني</th>
+                    <th>الجنس</th>
+                    <th>الدين</th>
+                    <th>نوع الترشح</th>
+                    <th>البريد الإلكتروني</th>
+                    <th>تاريخ الميلاد</th>
+                    <th>المحافظة</th>
+                    <th>منطقة الانتخابات</th>
+                    <th>حالة الطلب</th>
+                    <th>إجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CandidateName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NationalNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Religion)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Type_Chair)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.BirthdateCandidate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Governorate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ElectionArea)</td>
+                        <td>
+                            @if (item.Status != "Accepted" && item.Status != "Rejected")
+                            {
+                                @Html.ActionLink("Accept", "AcceptCandidate", new { id = item.CandidateID }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Reject", "RejectCandidate", new { id = item.CandidateID }, new { @class = "btn btn-danger" })
+                            }
+                            else if (item.Status == "Accepted")
+                            {
+                                <span class="label label-success">Accepted</span>
+                            }
+                            else if (item.Status == "Rejected")
+                            {
+                                <span class="label label-danger">Rejected</span>
+                            }
+                        </td>
+                        @*<td class="text-left">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.CandidateID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.CandidateID })
+                            </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

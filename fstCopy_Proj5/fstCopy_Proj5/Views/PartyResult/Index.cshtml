@@ -1,0 +1,106 @@
+﻿<div class="partycontainer">
+    <div class="card">
+        <div class="card-header">
+            <h3>نتائج العملية الانتخابية </h3>
+        </div>
+        <div class="card-body">
+            <p>عدد المقترعين : @ViewBag.TotalUsers</p>
+            <p>نسبة أصوات القائمة الحزبية : @ViewBag.PartyPercentage %</p>
+            <p>مجموع الأصوات الحزبية : @ViewBag.PartyVotes</p>
+            <p>عتبة القائمة الحزبية : @ViewBag.PartyThreshold</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>القوائم الحزبية التي تجاوزت العتبة </h4>
+        </div>
+        <div class="card-body">
+            @if (((List<string>)ViewBag.PartiesAboveThreshold).Any())
+            {
+                <ul>
+                    @foreach (var item in ViewBag.PartiesAboveThreshold)
+                    {
+                        <li>@Html.Raw(item)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>لا يوجد قوائم حزبية تجاوزت مستوى العتبة </p>
+            }
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>مجموع اصوات القائمة الناجحة </h4>
+        </div>
+        <div class="card-body">
+            <p>@ViewBag.WinningListsVotesSum</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>مقاعد القائمة الناجحة </h4>
+        </div>
+        <div class="card-body">
+            @if (((List<string>)ViewBag.PartyListsSeats).Any())
+            {
+                <ul>
+                    @foreach (var list in ViewBag.PartyListsSeats)
+                    {
+                        <li>@Html.Raw(list)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p> لا يوجد مقاعد لقائمة ناجحة </p>
+            }
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>المرشحين الناجحين من القوائم الحزبية </h4>
+        </div>
+        <div class="card-body">
+            @if (((List<string>)ViewBag.PartyWinningCandidates).Any())
+            {
+                <ul>
+                    @foreach (var candidate in ViewBag.PartyWinningCandidates)
+                    {
+                        <li>@Html.Raw(candidate)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>لا يوجد مرشحين ناجحين من القوائم الحزبية</p>
+            }
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>معلومات المرشحين والقوائم الحزبية </h4>
+        </div>
+        <div class="card-body">
+            @if (((List<string>)ViewBag.PartyListsAndCandidates).Any())
+            {
+                <ul>
+                    @foreach (var info in ViewBag.PartyListsAndCandidates)
+                    {
+                        <li>@Html.Raw(info)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>لا يوجد معلومات </p>
+            }
+        </div>
+    </div>
+</div>

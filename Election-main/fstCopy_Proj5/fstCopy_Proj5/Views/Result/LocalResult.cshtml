@@ -1,0 +1,54 @@
+﻿@model List<fstCopy_Proj5.Models.CircleViewModel>
+
+@{
+    ViewBag.Title = "Local Results";
+}
+
+<body>
+    <div class="container">
+        <div class="row">
+            @{string[] arr = { "دائرة اربد الاولى", "دائرة اربد الثانية", "دائرة عجلون" }; }
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow border">
+                        <div class="card-body">
+                            <h5 class="card-title">@arr[i]</h5>
+                            <p class="card-text">الاصوات المحلية: @Model[i].localvotecounter</p>
+                            <p class="card-text">الاوراق البيضاء: @Model[i].whitelocalcounter</p>
+                            <p class="card-text">مجموع الاصوات: @Model[i].totalVotes</p>
+                            <p class="card-text">العتبة: @Model[i].threshold</p>
+
+                            <h6 class="card-subtitle mb-2 text-muted">القائمة الرابحة</h6>
+                            @if (Model[i].winning_lists.Any())
+                            {
+                                foreach (var list in Model[i].winning_lists.Where(l => l.ActualSeats > 0))
+                                {
+                                    <div class="list-group mb-3">
+                                        <h6 class="list-group-item list-group-item-action active">
+                                            @list.ListName - @list.NumberOfVotes (المقاعد: @list.ActualSeats)
+                                        </h6>
+                                        @if (Model[i].winningCandidates.ContainsKey(list.ID))
+                                        {
+                                            foreach (var candidate in Model[i].winningCandidates[list.ID])
+                                            {
+                                                <div class="list-group-item">@candidate.CandidateName - @candidate.NumberOfVotesCandidate</div>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p class="card-text">قائمة غير رابحة</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>

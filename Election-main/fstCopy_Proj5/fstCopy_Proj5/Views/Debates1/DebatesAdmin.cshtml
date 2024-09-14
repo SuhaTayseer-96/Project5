@@ -1,0 +1,82 @@
+﻿@model IEnumerable<fstCopy_Proj5.Models.Debate>
+
+@{
+    ViewBag.Title = "DebatesAdmin";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2>DebatesAdmin</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Circle_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Of_Debate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Topic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First_Candidate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First_Candidate_List)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Second_Candidate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Second_Candidate_List)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zoom_link)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Circle_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Of_Debate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Topic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.First_Candidate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.First_Candidate_List)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Second_Candidate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Second_Candidate_List)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zoom_link)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,155 @@
+﻿@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+@model fstCopy_Proj5.Models.GeneralListCandidate
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>تقديم طلبات الترشح للقوائم الحزبية</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            background-color: #f8f9fa;
+        }
+
+        .custom-form .control-label {
+            text-align: right;
+        }
+
+        .custom-form .form-group label {
+            font-weight: bold;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .form-section {
+            flex: 1;
+            margin-right: 20px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            max-width: 600px;
+        }
+
+        .image-section {
+            flex: 1;
+            max-width: 400px;
+        }
+
+            .image-section img {
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+            }
+
+        .form-group.text-right input[type="submit"] {
+            background-color: #d9534f;
+            border-color: #d43f3a;
+            color: #fff;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+            .form-group.text-right input[type="submit"]:hover {
+                background-color: #c9302c;
+                border-color: #ac2925;
+            }
+
+        .btn {
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .page-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .form-horizontal .form-group {
+            margin-right: 0;
+        }
+
+        .form-horizontal .col-md-10 {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container custom-form">
+        <h2 class="page-title">التقدم للترشح</h2>
+        <div class="form-container">
+            <div class="form-section">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">اسم القائمة</label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("GeneralListingName", ViewBag.GeneralListingName as SelectList, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.GeneralListingName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">اسم المرشح</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CandidateName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CandidateName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">الرقم الوطني</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NationalNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NationalNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">البريد الالكتروني</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group text-right">
+                            <div class="col-md-12">
+                                <input type="submit" value="ارسال" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="image-section">
+                <img src="~/images/jordan.jpg" alt="Image">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

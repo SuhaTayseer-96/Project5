@@ -1,0 +1,38 @@
+﻿@model IEnumerable<fstCopy_Proj5.Models.DATE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="card mb-4">
+        <div class="card-body">
+            @foreach (var item in Model)
+            {
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        <p class="card-text">
+                            <strong>تاريخ بدء الترشح:</strong> @Html.DisplayFor(modelItem => item.startDateNominate)
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="card-text">
+                            <strong>تاريخ نهاية الترشح:</strong> @Html.DisplayFor(modelItem => item.EndDateNominate)
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="card-text">
+                            <strong>تاريخ بداية الانتخابات:</strong> @Html.DisplayFor(modelItem => item.startDateOfElection)
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="card-text">
+                            <strong>تاريخ نهاية الانتخابات:</strong> @Html.DisplayFor(modelItem => item.EndDateOfElection)
+                        </p>
+                    </div>
+                </div>
+                <hr />
+            }
+        </div>
+    </div>
+</div>

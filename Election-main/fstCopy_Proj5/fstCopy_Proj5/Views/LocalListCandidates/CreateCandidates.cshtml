@@ -1,0 +1,151 @@
+﻿@model List<fstCopy_Proj5.Models.LocalListCandidate>
+@{
+
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>إضافة المرشحين</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .custom-form .control-label {
+            text-align: right;
+        }
+
+        .custom-form .text-center {
+            text-align: center;
+        }
+
+        .custom-form .form-group label {
+            font-weight: bold;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .header img {
+                max-width: 150px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+        .divider {
+            border: 0;
+            height: 2px;
+            background-color: red;
+            margin: 20px 0;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .alert-danger {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .text-danger {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container custom-form">
+        <div class="header">
+            <h1>الأردن ينتخب</h1>
+            <img src="~/images/share-image.png" alt="شعار الهيئة المستقلة للانتخاب">
+        </div>
+        <hr class="divider" />
+        <h2 class="text-lg-end">إضافة المرشحين</h2>
+
+
+        @using (Html.BeginForm("CreateCandidates", "LocalListCandidates", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <hr />
+
+                <!-- عرض رسائل الخطأ كـ Alert -->
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger">
+                        <strong>خطأ:</strong>
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    </div>
+                }
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>اسم المرشح</th>
+                            <th>الرقم الوطني</th>
+                            <th>نوع الترشح</th>
+                            <th>تحميل صورة المرشح</th>
+
+                            <th>رقم القائمة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(m => m[i].CandidateName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m[i].CandidateName, "", new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m[i].NationalNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m[i].NationalNumber, "", new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m[i].Type_Chair, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m[i].Type_Chair, "", new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    <input type="file" name="ImageUploads[@i]" class="form-control" />
+                                    @Html.ValidationMessageFor(m => m[i].ImageUpload, " ", new { @class = "text-danger" })
+                                </td>
+
+                                <td>
+                                    @Html.HiddenFor(m => m[i].LocalListingID)
+                                    @Model[i].LocalListingID
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="form-group text-center">
+                    <div class="col-md-12">
+                        <input type="submit" value="تقديم الطلب" class="btn btn-danger" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

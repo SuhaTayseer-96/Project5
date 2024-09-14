@@ -1,0 +1,237 @@
+﻿@model fstCopy_Proj5.Models.LocalList
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة قائمة جديدة</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: row;
+            padding: 20px;
+            justify-content: space-between;
+        }
+
+        .image-section {
+            flex: 2; /* الحفاظ على نسبة عرض الصورة */
+            text-align: center;
+            padding: 10px;
+        }
+
+            .image-section img {
+                border-radius: 15px;
+                max-width: 100%;
+                height: auto;
+                min-height: 140vh; /* زيادة ارتفاع الصورة */
+            }
+
+        .form-section {
+            flex: 2; /* زيادة عرض الفورم */
+            background-color: #ffffff;
+            padding: 40px; /* زيادة padding لجعل الفورم أعرض من الداخل */
+            border-radius: 15px;
+            margin: 0 20px; /* إضافة مسافة من اليمين والشمال */
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            background-color: #f8f9fa;
+            padding: 20px; /* زيادة حجم فورم التعليمات */
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 18px; /* زيادة حجم النص داخل التعليمات */
+        }
+
+        .image-section img {
+            border-radius: 15px;
+            max-width: 100%;
+            height: auto;
+            min-height: 140vh; /* Increase the minimum height for more emphasis */
+        }
+
+        .form-section {
+            flex: 1.2; /* Increase the size of the form, but less than the image */
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+
+        input.btn.btn-primary {
+            margin-top: 21%;
+        }
+
+        .btn-primary {
+            background-color: #d9534f;
+            border-color: #d43f3a;
+            color: #fff;
+            width: 100%;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+            .btn-primary:hover {
+                background-color: #c9302c;
+                border-color: #ac2925;
+            }
+
+        .page-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .container.custom-form {
+            margin-bottom: 110px;
+        }
+
+        .instructions {
+            width: 107%;
+            background-color: #f8f9fa;
+            /* padding: 15px; */
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .h5, h5 {
+            font-size: 20px;
+        }
+
+        input#ListName,
+        select#ElectionArea,
+        select#Governorate,
+        input#ID,
+        input#ImageUpload {
+            height: 50px !important;
+            margin-top: 3%;
+            border-radius: 1px !important;
+        }
+
+        label.control-label {
+            font-size: 126%;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container custom-form">
+
+        <h2 class="page-title">
+            "ساهم في صنع القرار وتغيير المستقبل، رشّح نفسك الآن وكن جزءًا من مسيرة التطوير في مجتمعنا."
+        </h2>
+
+        <div class="card">
+            <div class="card-body">
+                <!-- قسم النموذج والتعليمات -->
+                <div class="form-section">
+                    <div class="instructions">
+                        <h5>تعليمات:</h5>
+                        <p>يرجى التأكد من إدخال المعلومات الصحيحة لضمان نجاح عملية التسجيل قبل تقديم الطلب.<a href="~/files/شروط ومرفقات طلب الترشح للدائرة الانتخابية (العامة_محلية) 2024_1-merged (1).pdf">رابط الملف</a> يرجى الاطلاع على شروط التقدم للانتخابات  لضمان أهليتك.
+                        </p>
+                    </div>
+
+                    @using (Html.BeginForm("CreateList", "LocalListCandidates"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                <label for="ListName" class="control-label">اسم القائمة</label>
+                                <div>
+                                    @Html.EditorFor(model => model.ListName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ListName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ID" class="control-label">رقم القائمة</label>
+                                <div>
+                                    @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Governorate" class="control-label">المحافظة</label>
+                                <div>
+                                    @Html.DropDownListFor(model => model.Governorate, new SelectList(new List<string> { "إربد", "عجلون", "عمان" }), "اختر المحافظة", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Governorate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ElectionArea" class="control-label">الدائرة الانتخابية</label>
+                                <div>
+                                    @Html.DropDownListFor(model => model.ElectionArea, ViewBag.ElectionAreas as SelectList, "اختر منطقة الانتخابات", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ElectionArea, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ImageUpload" class="control-label">تحميل صورة القائمة</label>
+                                <div>
+                                    <input type="file" name="ImageUpload" id="ImageUpload" class="form-control" />
+                                    @Html.ValidationMessage("ImageUpload", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group text-right">
+                                <div>
+                                    <input type="submit" value="الانتقال إلى النموذج التالي" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- قسم الصورة -->
+                <div class="image-section">
+                    <img src="~/images/image.jpg" alt="Image" class="img-responsive">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/66b9fbe2146b7af4a439583f/1i537vrfs';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+</html>

@@ -1,0 +1,138 @@
+﻿@model fstCopy_Proj5.Models.Ad
+
+@{
+    ViewBag.Title = "Delete Ad";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Delete Advertisement</h2>
+
+    <h3 class="text-danger text-center">Are you sure you want to delete this ad?</h3>
+
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <h4 class="card-title">Ad Details</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.nationalId)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.nationalId)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.data)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.data)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.listId)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.listId)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.partyName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.partyName)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.electionArea)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.electionArea)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.description)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.description)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.URL)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.URL)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.status)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.status)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="text-center mt-4">
+            <input type="submit" value="Delete" class="btn btn-danger btn-lg px-5" />
+            <a href="@Url.Action("advertisementAdmin")" class="btn btn-secondary btn-lg px-5 ml-3">Back to List</a>
+        </div>
+    }
+</div>
+<style>
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .card {
+        border-radius: 10px;
+        background-color: #f8f9fa;
+    }
+
+    .card-title {
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .dl-horizontal dt {
+        text-align: right;
+        color: #555;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 0;
+    }
+
+    .btn-lg {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn-lg:hover {
+        transform: scale(1.05);
+        transition: all 0.2s ease-in-out;
+    }
+
+    h3.text-danger {
+        font-weight: bold;
+    }
+
+</style>
